@@ -1,19 +1,37 @@
 <template>
     <span>
         <ul v-if="data && data.length" :class="[prefixCls + '-menu']">
-            <Casitem
-                v-for="item in data"
-                :key="getKey()"
-                :prefix-cls="prefixCls"
-                :data="item"
-                :tmp-item="tmpItem"
-                @click.native.stop="handleClickItem(item)"
-                @mouseenter.native.stop="handleHoverItem(item)"></Casitem>
-        </ul><Caspanel v-if="sublist && sublist.length" :prefix-cls="prefixCls" :data="sublist" :disabled="disabled" :trigger="trigger" :change-on-select="changeOnSelect"></Caspanel>
+            <li v-for="data in data" :key="data.value" 
+            :class="[`${prefixCls}-menu-item`,
+                {[`${prefixCls}-menu-item-active`]: tmpItem.value === data.value,
+                    [`${prefixCls}-menu-item-disabled`]: data.disabled
+                }]"
+                @click="handleClickItem(data)"
+                @mouseenter="handleHoverItem(data)">
+                <div v-if='data.introduction'>
+                    <Tooltip ref='tooltipShow' placement="left" trigger="hover" :content="data.introduction" transfer theme="light" max-width="200" style="width:110%;">
+                        <template v-slot:content>
+                            <p style="color: #2f2f3f;font-weight: bold;"> {{data.label}}</p>
+                            <span>{{data.introduction}}</span>
+                        </template>
+                        <p style="width:100%;z-index:1000;" :class="data.value">{{ data.label }}</p>
+                    </Tooltip>
+                    <Icon :type="arrowType" :custom="customArrowType" :size="arrowSize" v-if="data.children && data.children.length" />
+                    <i v-if="'loading' in data && data.loading" class="ivu-icon ivu-icon-ios-loading ivu-load-loop ivu-cascader-menu-item-loading"></i>
+                </div>
+                <div v-else>
+                    {{ data.label }}
+                    <Icon :type="arrowType" :custom="customArrowType" :size="arrowSize" v-if="data.children && data.children.length" />
+                    <i v-if="'loading' in data && data.loading" class="ivu-icon ivu-icon-ios-loading ivu-load-loop ivu-cascader-menu-item-loading"></i>
+                </div>
+            </li>
+        </ul>
+        <Caspanel v-if="sublist && sublist.length" :prefix-cls="prefixCls" :data="sublist" :disabled="disabled" :trigger="trigger" :change-on-select="changeOnSelect"></Caspanel>
     </span>
 </template>
 <script>
     import Casitem from './casitem.vue';
+     import Icon from '../icon/icon.vue';
     import Emitter from '../../mixins/emitter';
     import { findComponentUpward, findComponentDownward } from '../../utils/assist';
 
@@ -22,7 +40,7 @@
     export default {
         name: 'Caspanel',
         mixins: [ Emitter ],
-        components: { Casitem },
+        components: { Icon,Casitem },
         props: {
             data: {
                 type: Array,
@@ -33,7 +51,46 @@
             disabled: Boolean,
             changeOnSelect: Boolean,
             trigger: String,
-            prefixCls: String
+            prefixCls: String,
+            showLoading:false,
+        },
+       computed: {
+        
+            // 3.4.0, global setting customArrow 有值时，arrow 赋值空
+            arrowType () {
+                let type = 'ios-arrow-forward';
+
+                if (this.$IVIEW) {
+                    if (this.$IVIEW.cascader.customItemArrow) {
+                        type = '';
+                    } else if (this.$IVIEW.cascader.itemArrow) {
+                        type = this.$IVIEW.cascader.itemArrow;
+                    }
+                }
+                return type;
+            },
+            // 3.4.0, global setting
+            customArrowType () {
+                let type = '';
+
+                if (this.$IVIEW) {
+                    if (this.$IVIEW.cascader.customItemArrow) {
+                        type = this.$IVIEW.cascader.customItemArrow;
+                    }
+                }
+                return type;
+            },
+            // 3.4.0, global setting
+            arrowSize () {
+                let size = '';
+
+                if (this.$IVIEW) {
+                    if (this.$IVIEW.cascader.itemArrowSize) {
+                        size = this.$IVIEW.cascader.itemArrowSize;
+                    }
+                }
+                return size;
+            }
         },
         data () {
             return {
