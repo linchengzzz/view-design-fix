@@ -1,7 +1,7 @@
 <template>
     <span>
         <ul v-if="data && data.length" :class="[prefixCls + '-menu']">
-            <li v-for="data in data" :key="data.value" 
+            <li v-for="(data,index) in data" :key="data.value+index" 
             :class="[`${prefixCls}-menu-item`,
                 {[`${prefixCls}-menu-item-active`]: tmpItem.value === data.value,
                     [`${prefixCls}-menu-item-disabled`]: data.disabled
