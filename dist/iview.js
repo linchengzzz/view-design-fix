@@ -11457,6 +11457,10 @@ var _casitem = __webpack_require__(369);
 
 var _casitem2 = _interopRequireDefault(_casitem);
 
+var _icon = __webpack_require__(8);
+
+var _icon2 = _interopRequireDefault(_icon);
+
 var _emitter = __webpack_require__(4);
 
 var _emitter2 = _interopRequireDefault(_emitter);
@@ -11470,7 +11474,7 @@ var key = 1;
 exports.default = {
     name: 'Caspanel',
     mixins: [_emitter2.default],
-    components: { Casitem: _casitem2.default },
+    components: { Icon: _icon2.default, Casitem: _casitem2.default },
     props: {
         data: {
             type: Array,
@@ -11481,7 +11485,42 @@ exports.default = {
         disabled: Boolean,
         changeOnSelect: Boolean,
         trigger: String,
-        prefixCls: String
+        prefixCls: String,
+        showLoading: false
+    },
+    computed: {
+        arrowType: function arrowType() {
+            var type = 'ios-arrow-forward';
+
+            if (this.$IVIEW) {
+                if (this.$IVIEW.cascader.customItemArrow) {
+                    type = '';
+                } else if (this.$IVIEW.cascader.itemArrow) {
+                    type = this.$IVIEW.cascader.itemArrow;
+                }
+            }
+            return type;
+        },
+        customArrowType: function customArrowType() {
+            var type = '';
+
+            if (this.$IVIEW) {
+                if (this.$IVIEW.cascader.customItemArrow) {
+                    type = this.$IVIEW.cascader.customItemArrow;
+                }
+            }
+            return type;
+        },
+        arrowSize: function arrowSize() {
+            var size = '';
+
+            if (this.$IVIEW) {
+                if (this.$IVIEW.cascader.itemArrowSize) {
+                    size = this.$IVIEW.cascader.itemArrowSize;
+                }
+            }
+            return size;
+        }
     },
     data: function data() {
         return {
@@ -30550,7 +30589,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 var API = (0, _extends3.default)({
-    version: '4.4.3',
+    version: '4.4.4',
     locale: _index2.default.use,
     i18n: _index2.default.i18n,
     install: install,
@@ -33300,8 +33339,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_caspanel_vue__ = __webpack_require__(137);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_caspanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_caspanel_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_caspanel_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_caspanel_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_loader_sourceMap_node_modules_vue_loader_lib_template_compiler_index_id_data_v_cad99e86_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_caspanel_vue__ = __webpack_require__(372);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_loader_sourceMap_node_modules_vue_loader_lib_template_compiler_index_id_data_v_cad99e86_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_caspanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__babel_loader_sourceMap_node_modules_vue_loader_lib_template_compiler_index_id_data_v_cad99e86_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_caspanel_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_loader_sourceMap_node_modules_vue_loader_lib_template_compiler_index_id_data_v_3f6cc607_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_caspanel_vue__ = __webpack_require__(372);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_loader_sourceMap_node_modules_vue_loader_lib_template_compiler_index_id_data_v_3f6cc607_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_caspanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__babel_loader_sourceMap_node_modules_vue_loader_lib_template_compiler_index_id_data_v_3f6cc607_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_caspanel_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(0);
 /* script */
 
@@ -33319,8 +33358,8 @@ var __vue_module_identifier__ = null
 
 var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_caspanel_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__babel_loader_sourceMap_node_modules_vue_loader_lib_template_compiler_index_id_data_v_cad99e86_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_caspanel_vue__["render"],
-  __WEBPACK_IMPORTED_MODULE_1__babel_loader_sourceMap_node_modules_vue_loader_lib_template_compiler_index_id_data_v_cad99e86_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_caspanel_vue__["staticRenderFns"],
+  __WEBPACK_IMPORTED_MODULE_1__babel_loader_sourceMap_node_modules_vue_loader_lib_template_compiler_index_id_data_v_3f6cc607_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_caspanel_vue__["render"],
+  __WEBPACK_IMPORTED_MODULE_1__babel_loader_sourceMap_node_modules_vue_loader_lib_template_compiler_index_id_data_v_3f6cc607_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_caspanel_vue__["staticRenderFns"],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
@@ -33413,16 +33452,19 @@ exports.staticRenderFns = staticRenderFns;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+            value: true
 });
 var render = function render() {
-  var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('span', [_vm.data && _vm.data.length ? _c('ul', { class: [_vm.prefixCls + '-menu'] }, _vm._l(_vm.data, function (item) {
-    return _c('Casitem', { key: _vm.getKey(), attrs: { "prefix-cls": _vm.prefixCls, "data": item, "tmp-item": _vm.tmpItem }, nativeOn: { "click": function click($event) {
-          $event.stopPropagation();return _vm.handleClickItem(item);
-        }, "mouseenter": function mouseenter($event) {
-          $event.stopPropagation();return _vm.handleHoverItem(item);
-        } } });
-  }), 1) : _vm._e(), _vm.sublist && _vm.sublist.length ? _c('Caspanel', { attrs: { "prefix-cls": _vm.prefixCls, "data": _vm.sublist, "disabled": _vm.disabled, "trigger": _vm.trigger, "change-on-select": _vm.changeOnSelect } }) : _vm._e()], 1);
+            var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('span', [_vm.data && _vm.data.length ? _c('ul', { class: [_vm.prefixCls + '-menu'] }, _vm._l(_vm.data, function (data) {
+                        var _obj;
+                        return _c('li', { key: data.value, class: [_vm.prefixCls + "-menu-item", (_obj = {}, _obj[_vm.prefixCls + "-menu-item-active"] = _vm.tmpItem.value === data.value, _obj[_vm.prefixCls + "-menu-item-disabled"] = data.disabled, _obj)], on: { "click": function click($event) {
+                                                            return _vm.handleClickItem(data);
+                                                }, "mouseenter": function mouseenter($event) {
+                                                            return _vm.handleHoverItem(data);
+                                                } } }, [data.introduction ? _c('div', [_c('Tooltip', { ref: "tooltipShow", refInFor: true, staticStyle: { "width": "110%" }, attrs: { "placement": "left", "trigger": "hover", "content": data.introduction, "transfer": "", "theme": "light", "max-width": "200" }, scopedSlots: _vm._u([{ key: "content", fn: function fn() {
+                                                            return [_c('p', { staticStyle: { "color": "#2f2f3f", "font-weight": "bold" } }, [_vm._v(" " + _vm._s(data.label))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(data.introduction))])];
+                                                }, proxy: true }], null, true) }, [_vm._v(" "), _c('p', { class: data.value, staticStyle: { "width": "100%", "z-index": "1000" } }, [_vm._v(_vm._s(data.label))])]), _vm._v(" "), data.children && data.children.length ? _c('Icon', { attrs: { "type": _vm.arrowType, "custom": _vm.customArrowType, "size": _vm.arrowSize } }) : _vm._e(), _vm._v(" "), 'loading' in data && data.loading ? _c('i', { staticClass: "ivu-icon ivu-icon-ios-loading ivu-load-loop ivu-cascader-menu-item-loading" }) : _vm._e()], 1) : _c('div', [_vm._v("\n                " + _vm._s(data.label) + "\n                "), data.children && data.children.length ? _c('Icon', { attrs: { "type": _vm.arrowType, "custom": _vm.customArrowType, "size": _vm.arrowSize } }) : _vm._e(), _vm._v(" "), 'loading' in data && data.loading ? _c('i', { staticClass: "ivu-icon ivu-icon-ios-loading ivu-load-loop ivu-cascader-menu-item-loading" }) : _vm._e()], 1)]);
+            }), 0) : _vm._e(), _vm._v(" "), _vm.sublist && _vm.sublist.length ? _c('Caspanel', { attrs: { "prefix-cls": _vm.prefixCls, "data": _vm.sublist, "disabled": _vm.disabled, "trigger": _vm.trigger, "change-on-select": _vm.changeOnSelect } }) : _vm._e()], 1);
 };
 var staticRenderFns = [];
 exports.render = render;
